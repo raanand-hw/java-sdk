@@ -23,7 +23,7 @@ jobs:
     - name: Run Synopsys Detect
       uses: synopsys-sig/detect-action@v0.3.4
       with:
-          scan-mode: RAPID
+          scan-mode: INTELLIGENT
           detect-blackduck-rapid-compare-mode: BOM_COMPARE_STRICT
           project-name: hyperwallet-program-portal
           project-version-name: 1.0.0
