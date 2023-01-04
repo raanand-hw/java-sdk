@@ -1,61 +1,46 @@
-name: Black Duck
+name: "Synopsys Intelligent Security Scan"
 
-# Run Rapid Scan on all pull requests and pushes to a main branch
 on:
-  # Run Black Duck on pushes to main branches, and pull requests that are going
-  # to be merged to main branches.
   push:
-    branches: [ master, main ]
+    branches: [master]
   pull_request:
-    branches: [ master, main ]
-
-  # Allow ad-hoc, manual invocations of the Coverity workflow.
-  workflow_dispatch:
+    branches: [master]
 
 jobs:
-  build:
-    # The type of runner that the job will run on - Black Duck can also run on Windows and macOS
+  security:
+    name: security scans
     runs-on: [self-hosted, linux]
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-       
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Setup Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
 
-      - name: Black Duck (Rapid scan)
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: synopsys-sig/detect-action@main
-        # For pull requests, limit the feedback to policy violations newly introduced by code changes
-        # within the PR. This option will compare the results found in the PR scan to the results found
-        # in the last central full/intelligent scan, and only report the new violations. This is helpful
-        # to keep developers focused in their day to day on their code changes and not overwhelm them with
-        # findings they may not be responsible for.
-        env:
-          DETECT_BLACKDUCK_RAPID_COMPARE_MODE: BOM_COMPARE_STRICT
-        # You can use this option to configure a CA cert if using a self-hosted runner and self-signed
-        # certificates on your Hub server. This option should point to a file on the local filesystem
-        # with the CA chain cert
-        #env:
-        #  NODE_EXTRA_CA_CERTS: ${{ secrets.LOCAL_CA_CERT_PATH }}
-        with:
-            scan-mode: RAPID
-            github-token: ${{ secrets.GITHUB_TOKEN }}
-            detect-version: 7.12.0
-            blackduck-url: ${{ secrets.BLACKDUCK_URL }}
-            blackduck-api-token: ${{ secrets.BLACKDUCK_API_TOKEN }}
-
-      - name: Black Duck (Full scan)
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: synopsys-sig/detect-action@main
-        # You can use this option to configure a CA cert if using a self-hosted runner and self-signed
-        # certificates on your Hub server. This option should point to a file on the local filesystem
-        # with the CA chain cert
-        #env:
-        #  NODE_EXTRA_CA_CERTS: ${{ secrets.LOCAL_CA_CERT_PATH }}
-        with:
-          scan-mode: INTELLIGENT
+    - name: Run Synopsys Detect
+      uses: synopsys-sig/detect-action@v0.3.4
+      with:
+          scan-mode: RAPID
+          detect-blackduck-rapid-compare-mode: BOM_COMPARE_STRICT
+          project-name: hyperwallet-program-portal
+          project-version-name: 1.0.0
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          detect-version: 7.12.0
+          detect-version: 7.9.0
           blackduck-url: ${{ secrets.BLACKDUCK_URL }}
           blackduck-api-token: ${{ secrets.BLACKDUCK_API_TOKEN }}
+          cleanup: false
+      env:
+          #DETECT_BLACKDUCK_RAPID_COMPARE_MODE: BOM_COMPARE_STRICT      
+          #DETECT_PROJECT_GROUP_NAME: PayPalBU-Venmo
+          LOGGING_PROJECT_GROUP_NAME: DEBUG
+          LOGGING_LEVEL_COM_SYNOPSYS_INTEGRATION: DEBUG
+          #DETECT_PROJECT_USER_GROUPS: PP_SSO_BLACKDUCK_USER,PP_SSO_BLACKDUCK_ADMIN,PP_SSO_BLACKDUCK_SECURITY_CHAMPION
+          DETECT_DETECTOR_SEARCH_CONTINUE: TRUE #Will search all subdirectories for build files
+          DETECT_POLICY_CHECK_FAIL_ON_SEVERITIES: BLOCKER,CRITICAL #This will fail the scan only if BLOCKERS and CRITICALS
+          DETECT_EXCLUDED_DIRECTORIES: "'DevRunner,*Test*,*test*,*mock*,build,docs,spec,docker,config,tasks,*locale*,*Locale*,*Content*,*content*,public,templates,documentation,*temp*,*tmp*,.repository,.github,.git'" #Exclude these dirs from the scan
+          DETECT_PARALLEL_PROCESSORS: 0
+          DETECT_PROJECT_NAME: hyperwallet-program-portal
+          DETECT_PROJECT_VERSION_NAME: 1.0.0
