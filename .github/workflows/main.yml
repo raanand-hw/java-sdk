@@ -25,8 +25,6 @@ jobs:
       with:
           scan-mode: RAPID
           detect-blackduck-rapid-compare-mode: BOM_COMPARE_STRICT
-          project-name: hyperwallet-program-portal
-          project-version-name: 1.0.0
           github-token: ${{ secrets.GITHUB_TOKEN }}
           detect-version: 7.9.0
           blackduck-url: ${{ secrets.BLACKDUCK_URL }}
