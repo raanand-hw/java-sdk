@@ -23,7 +23,7 @@ jobs:
     - name: Run Synopsys Detect
       uses: synopsys-sig/detect-action@v0.3.4
       with:
-          scan-mode: RAPID
+          scan-mode: INTELLIGENT
           detect-blackduck-rapid-compare-mode: BOM_COMPARE_STRICT
           github-token: ${{ secrets.GITHUB_TOKEN }}
           detect-version: 7.9.0
