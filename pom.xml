@@ -156,7 +156,7 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <scope>test</scope>
-            <version>20200518</version>
+            <version>20250517</version>
         </dependency>
 <!--         <dependency>
           <groupId>org.apache.httpcomponents</groupId>
@@ -327,3 +327,4 @@
     </distributionManagement>
 
 </project>
+
