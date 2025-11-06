@@ -7,7 +7,7 @@ job:
   allowed-updates:
     - dependency-type: direct
       update-type: all
-  security-updates-only: true
+  security-updates-only: false
   source:
     provider: github
     repo: raanand-hw/java-sdk
@@ -19,4 +19,6 @@ job:
       applies-to: security-updates
       rules:
         patterns:
-          - "*"
+          - com.nimbusds *
+          - org.springframework.boot:spring-boot
+          
