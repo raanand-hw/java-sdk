@@ -61,5 +61,5 @@ jq -c 'select(.type == "create_pull_request")' "$INPUT" | while read -r event; d
   gh pr create --title "$PR_TITLE" --body "$PR_BODY" --base main --head "$BRANCH_NAME" --label dependencies || true
 
   # Return to main branch for next PR
-  git checkout main
+  git checkout master
 done
