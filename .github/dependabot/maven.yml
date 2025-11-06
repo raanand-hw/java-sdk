@@ -6,8 +6,8 @@ job:
   package-manager: maven
   allowed-updates:
     - dependency-type: direct
-      update-type: security
-
+      update-type: all
+  security-updates-only: true
   source:
     provider: github
     repo: raanand-hw/java-sdk
