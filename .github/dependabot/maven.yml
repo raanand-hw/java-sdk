@@ -7,12 +7,7 @@ job:
   allowed-updates:
     - dependency-type: direct
       update-type: all
-  dependency-groups:
-      - name: maven
-        applies-to: security-updates
-        rules:
-          patterns:
-              - '*'
+
   source:
     provider: github
     repo: raanand-hw/java-sdk
@@ -21,6 +16,7 @@ job:
     branch: master
   dependency-groups:
     - name: everything
+      applies-to: security-updates
       rules:
         patterns:
           - "*"
