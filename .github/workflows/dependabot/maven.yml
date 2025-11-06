@@ -3,16 +3,16 @@
 
 job:
   # this is the directory defined in dependabot-core for the ecosystem
-  package-manager: bundler
+  package-manager: maven
   allowed-updates:
     - dependency-type: direct
       update-type: all
   source:
     provider: github
-    repo: dependabot/example-cli-usage
+    repo: raanand-hw/java-sdk
     # looks absolute, but this is relative to the root of the repo
-    directory: /bundler-example
-    branch: main
+    directory: /
+    branch: master
   dependency-groups:
     - name: everything
       rules:
