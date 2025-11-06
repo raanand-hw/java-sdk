@@ -1,0 +1,20 @@
+# This is the input to Dependabot CLI.
+# For more examples of what you can do, see the smoke tests: https://github.com/dependabot/smoke-tests/tree/main/tests
+
+job:
+  # this is the directory defined in dependabot-core for the ecosystem
+  package-manager: bundler
+  allowed-updates:
+    - dependency-type: direct
+      update-type: all
+  source:
+    provider: github
+    repo: dependabot/example-cli-usage
+    # looks absolute, but this is relative to the root of the repo
+    directory: /bundler-example
+    branch: main
+  dependency-groups:
+    - name: everything
+      rules:
+        patterns:
+          - "*"
