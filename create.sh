@@ -37,9 +37,11 @@ jq -c 'select(.type == "create_pull_request")' "$INPUT" | while read -r event; d
   git checkout "$BASE_SHA"
   git checkout -b "$BRANCH_NAME"
 
+  ls -l
   # Apply file changes
   echo "$event" | jq -c '.data."updated-dependency-files"[]' | while read -r file; do
     # FILE_PATH=$(echo "$file" | jq -r '.directory + "/" + .name' | sed 's#^/##')
+    ls -l
     FILE_PATH=$(echo "$file" | jq -r '.directory + "/" + .name' | sed 's#^/*##')
     DELETED=$(echo "$file" | jq -r '.deleted')
     if [ "$DELETED" = "true" ]; then
