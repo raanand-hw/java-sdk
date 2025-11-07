@@ -6,7 +6,7 @@ job:
   package-manager: maven
   allowed-updates:
     - dependency-type: direct
-      update-type: security
+      update-type: security_updates_only
   security-updates-only: false
   source:
     provider: github
