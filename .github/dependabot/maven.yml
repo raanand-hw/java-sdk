@@ -7,7 +7,6 @@ job:
   allowed-updates:
     - dependency-type: direct
       update-type: security_updates_only
-  security-updates-only: false
   source:
     provider: github
     repo: raanand-hw/java-sdk
