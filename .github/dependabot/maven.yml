@@ -20,6 +20,6 @@ job:
       rules:
         patterns:
            - '*'
-   dependencies:
+  dependencies:
             - org.springframework.boot:spring-boot
           
