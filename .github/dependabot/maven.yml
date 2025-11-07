@@ -15,10 +15,9 @@ job:
     directory: /
     branch: master
   dependency-groups:
-    - name: everything
+    - name: maven_pkgs
       applies-to: security-updates
       rules:
         patterns:
-          - com.nimbusds *
           - org.springframework.boot:spring-boot
           
