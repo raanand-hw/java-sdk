@@ -16,7 +16,10 @@ job:
     branch: master
   dependency-groups:
     - name: maven_pkgs
+      applies-to: security-updates
       rules:
         patterns:
-          - org.springframework.boot:spring-boot
+           - '*'
+   dependencies:
+            - org.springframework.boot:spring-boot
           
