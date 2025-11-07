@@ -106,7 +106,7 @@
         <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot</artifactId>
-    <version>3.4.4</version>
+    <version>3.5.7</version>
 </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -327,3 +327,4 @@
     </distributionManagement>
 
 </project>
+
