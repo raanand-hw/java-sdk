@@ -22,4 +22,12 @@ job:
            - '*'
   dependencies:
             - org.springframework.boot:spring-boot
+ security-advisories:
+          - dependency-name: org.springframework.boot:spring-boot
+            affected-versions:
+              - < 3.4.4
+            patched-versions: []
+            unaffected-versions: []
+      security-updates-only: true
+            
           
