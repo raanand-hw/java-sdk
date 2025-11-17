@@ -150,7 +150,7 @@
         <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
-            <version>8.20</version>
+            <version>10.6</version>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
@@ -327,3 +327,4 @@
     </distributionManagement>
 
 </project>
+
